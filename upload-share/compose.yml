@@ -1,0 +1,14 @@
+services:
+  app:
+    image: localhost/upload-share
+    restart: unless-stopped
+    user: 1000:1000
+    ports:
+      - "127.0.0.1:3040:3000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - UPLOAD_TOKEN=${UPLOAD_TOKEN}
+      - ORIGIN=${ORIGIN}
+      - MAX_ARCHIVE_SIZE=${MAX_ARCHIVE_SIZE}
+      - BODY_SIZE_LIMIT=107374182400

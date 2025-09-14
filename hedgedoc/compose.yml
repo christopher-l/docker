@@ -1,0 +1,38 @@
+services:
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: hedgedoc_mariadb
+    restart: always
+    volumes:
+      - ./mariadb:/config
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=hedgedoc
+      - MYSQL_USER=hedgedoc
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Berlin
+  hedgedoc:
+    image: lscr.io/linuxserver/hedgedoc:latest
+    container_name: hedgedoc
+    restart: always
+    depends_on:
+      - mariadb
+    volumes:
+      - ./hedgedoc:/config
+    environment:
+      - DB_HOST=mariadb
+      - DB_USER=hedgedoc
+      - DB_PASS=${MYSQL_PASSWORD}
+      - DB_NAME=hedgedoc
+      - DB_PORT=3306
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Berlin
+      - CMD_DOMAIN=hedgedoc.e6.freeddns.org
+      - CMD_URL_ADDPORT=false #optional
+      - CMD_PROTOCOL_USESSL=true #optional
+      - CMD_PORT=3000 #optional
+    ports:
+      - "127.0.0.1:3000:3000"

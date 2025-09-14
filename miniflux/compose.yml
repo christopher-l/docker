@@ -1,0 +1,35 @@
+services:
+  miniflux:
+    image: miniflux/miniflux:latest
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: 10m
+    environment:
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db/${DB_DATABASE}?sslmode=disable
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=${ADMIN_USER}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    ports:
+      - 127.0.0.1:3010:8080
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    user: 1000:1000
+    logging:
+      options:
+        max-size: 10m
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "miniflux"]
+      interval: 10s
+      start_period: 30s
