@@ -12,17 +12,11 @@ for d in */ ; do
     )
 done
 
-# echo Creating archive...
-# tar \
-#     --exclude='miniflux/db/*' \
-#     --exclude='hedgedoc/mariadb/*' \
-#     --exclude=paperless-ngx/data/db.sqlite3 \
-#     --exclude='upload-share/run/*' \
-#     -czf "$1" -C $(dirname $(pwd)) $(basename $(pwd))
-
 echo Copying data...
-rsync -a \
+rsync . -a \
     --exclude='miniflux/db/*' \
     --exclude='hedgedoc/mariadb/*' \
     --exclude='paperless-kana/data/*' \
-    --exclude='upload-share/data/*' \ 
+    --exclude='upload-share/data/*' \
+    --delete-excluded \
+    /home/chris/Backup/Vortex/Docker/
