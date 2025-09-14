@@ -3,4 +3,3 @@ data
 export
 media
 .env
-dump.sqlite3

@@ -2,4 +2,4 @@
 
 set -e
 
-sqlite3 data/db.sqlite3 ".backup 'dump.sqlite3'"
+docker compose exec webserver document_exporter ../export -d --data-only
