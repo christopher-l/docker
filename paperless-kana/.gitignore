@@ -2,5 +2,5 @@ consume
 data
 export
 media
-compose.env
+.env
 dump.sqlite3
