@@ -18,5 +18,6 @@ rsync . -a \
     --exclude='hedgedoc/mariadb/*' \
     --exclude='paperless-kana/data/*' \
     --exclude='upload-share/data/*' \
+    --delete \
     --delete-excluded \
     /home/chris/Backup/Vortex/Docker/
