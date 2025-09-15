@@ -53,6 +53,7 @@ services:
       - ./consume:/usr/src/paperless/consume
     env_file: .env
     environment:
+      TZ: ${PAPERLESS_TIME_ZONE}
       PAPERLESS_REDIS: redis://broker:6379
 
 volumes:
