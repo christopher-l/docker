@@ -1,0 +1,12 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    user: 1000:1000
+    environment:
+      DOMAIN: "https://vaultwarden.e6.freeddns.org"
+      SIGNUPS_ALLOWED: "false"
+    volumes:
+      - ./data/:/data/
+    ports:
+      - 127.0.0.1:3050:80
