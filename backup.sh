@@ -19,6 +19,7 @@ rsync . -a \
     --exclude='paperless-kana/data/*' \
     --exclude='upload-share/data/*' \
     --exclude='vaultwarden/data/*' \
+    --exclude='.git' \
     --delete \
     --delete-excluded \
     /home/chris/Backup/Vortex/Docker/
