@@ -20,6 +20,7 @@ rsync . -a \
     --exclude='upload-share/data/*' \
     --exclude='vaultwarden/data/*' \
     --exclude='.git' \
+    --exclude='.ssh' \
     --delete \
     --delete-excluded \
     /home/chris/Backup/Vortex/Docker/
