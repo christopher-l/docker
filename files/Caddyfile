@@ -1,0 +1,9 @@
+http://vortex {
+	handle_path /files/* {
+		basic_auth {
+			{$CADDY_BASICAUTH}
+		}
+		root * /srv
+		file_server browse
+	}
+}

@@ -1,0 +1,13 @@
+services:
+  caddy:
+    image: caddy:alpine
+    restart: unless-stopped
+    user: 1000:1000
+    environment:
+      CADDY_BASICAUTH: ${CADDY_BASICAUTH}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - /home/chris/Archive:/srv/Archive:ro
+      - /home/chris/Documents:/srv/Documents:ro
+    ports:
+      - 127.0.0.1:3110:80
