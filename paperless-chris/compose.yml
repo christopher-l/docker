@@ -28,12 +28,12 @@
 
 services:
   broker:
-    image: docker.io/library/redis:7
+    image: docker.io/library/redis:7.4.7
     restart: unless-stopped
     volumes:
       - redisdata:/data
   webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.3
     user: 1000:1000
     restart: unless-stopped
     depends_on:

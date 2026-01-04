@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:alpine
+    image: caddy:2.10.2-alpine
     restart: unless-stopped
     user: 1000:1000
     environment:
