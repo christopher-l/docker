@@ -1,6 +1,6 @@
 services:
   vaultwarden:
-    image: vaultwarden/server:latest
+    image: vaultwarden/server:1.35.1
     restart: unless-stopped
     user: 1000:1000
     environment:
