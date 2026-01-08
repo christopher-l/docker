@@ -10,4 +10,4 @@ docker-compose exec -i db /bin/bash -c \
 # Restore with
 # source .env
 # docker-compose exec -T db /bin/bash -c \
-#     PGPASSWORD=$DB_PASSWORD psql --username $DB_USER $DB_DATABASE" < dump.sql
+#     "PGPASSWORD=$DB_PASSWORD psql --username $DB_USER $DB_DATABASE" < dump.sql

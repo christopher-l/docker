@@ -17,7 +17,7 @@ services:
     ports:
       - 127.0.0.1:3010:8080
   db:
-    image: postgres:15.15
+    image: postgres:18.1
     restart: unless-stopped
     user: 1000:1000
     logging:
@@ -28,7 +28,7 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - ./db:/var/lib/postgresql
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
