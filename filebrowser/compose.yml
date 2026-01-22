@@ -1,0 +1,10 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:v2.55.0
+    user: 1000:1000
+    volumes:
+      - /home/chris/WebDav:/srv
+      - ./db:/database
+      - ./config:/config
+    ports:
+      - 127.0.0.1:3070:80
