@@ -1,6 +1,6 @@
 services:
   silverbullet:
-    image: ghcr.io/silverbulletmd/silverbullet:2.3.0
+    image: ghcr.io/silverbulletmd/silverbullet:2.4.1
     restart: unless-stopped
     user: 1000:1000
     volumes:
