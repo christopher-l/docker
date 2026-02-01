@@ -1,6 +1,6 @@
 services:
   mariadb:
-    image: docker.io/mariadb:11.4.8
+    image: docker.io/mariadb:12.1.2
     container_name: hedgedoc_mariadb
     restart: always
     user: 1000:1000
