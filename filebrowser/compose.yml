@@ -4,9 +4,9 @@ services:
     restart: unless-stopped
     user: 1000:1000
     volumes:
-      - ./data:/srv
+      - ./media:/srv
       - /home/chris/Documents/Sync:/srv/Sync
-      - ./db:/database
+      - ./data:/database
       - ./config:/config
     ports:
       - 127.0.0.1:3070:80

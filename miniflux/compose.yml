@@ -28,8 +28,8 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
-      - ./db:/var/lib/postgresql
+      - ./data:/var/lib/postgresql
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
+      start_period: 2m
       interval: 10s
-      start_period: 30s

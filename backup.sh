@@ -8,19 +8,15 @@ for d in */ ; do
     (
         echo Backing up $d...
         cd $d
-        ./backup.sh
+        ./backup.sh backup
     )
 done
 
 echo Copying data...
 rsync . -a \
-    --exclude='miniflux/db/*' \
-    --exclude='hedgedoc/mariadb/*' \
-    --exclude='paperless-kana/data/*' \
-    --exclude='upload-share/data/*' \
-    --exclude='vaultwarden/data/*' \
-    --exclude='.git' \
-    --exclude='.ssh' \
+    --exclude='/*/data/*' \
+    --exclude='/.git' \
+    --exclude='/.ssh' \
     --delete \
     --delete-excluded \
     /home/chris/Backup/Vortex/Docker/
