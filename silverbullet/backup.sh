@@ -2,4 +2,17 @@
 
 set -e
 
-rsync -a --delete data/ backup/
+case $1 in
+    backup)
+        rsync -a --delete data/ backup/
+        ;;
+    restore)
+        rsync -a --delete backup/ data/
+        ;;
+    restore_online)
+        false
+        ;;
+    *)
+        echo invalid command: $1
+        exit 1
+esac

@@ -2,4 +2,4 @@
 
 set -e
 
-true
+# Do nothing
