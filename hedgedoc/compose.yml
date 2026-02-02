@@ -11,6 +11,7 @@ services:
       - MARIADB_DATABASE=hedgedoc
       - MARIADB_USER=hedgedoc
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_AUTO_UPGRADE=1
       - TZ=Europe/Berlin
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
