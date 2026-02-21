@@ -2,4 +2,5 @@ consume
 data
 export
 media
+redis
 .env
