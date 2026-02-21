@@ -6,15 +6,15 @@ source .env
 
 case $1 in
     backup)
-        docker-compose exec -i mariadb \
-            mariadb-dump -uroot -p$MARIADB_ROOT_PASSWORD --all-databases > dump.sql
+        docker-compose exec -i db /bin/bash -c \
+            "PGPASSWORD=$DB_PASSWORD pg_dump --username hedgedoc hedgedoc" > dump.sql
         ;;
     restore)
-        docker-compose exec -T mariadb \
-            mariadb -uroot -p$MARIADB_ROOT_PASSWORD < dump.sql
+        docker-compose exec -T db /bin/bash -c \
+            "PGPASSWORD=$DB_PASSWORD psql --username hedgedoc hedgedoc" < dump.sql
         ;;
     restore_online)
-        echo "mariadb"
+        echo "db"
         ;;
     *)
         echo invalid command: $1

@@ -1,42 +1,32 @@
 services:
-  mariadb:
-    image: docker.io/mariadb:12.1.2
-    container_name: hedgedoc_mariadb
-    restart: always
-    user: 1000:1000
+  hedgedoc:
+    image: quay.io/hedgedoc/hedgedoc:1.10.6
+    restart: unless-stopped
+    depends_on:
+      - db
+    user: 3020:3020
     volumes:
-      - ./data:/var/lib/mysql
+      - .uploads:/hedgedoc/public/uploads
     environment:
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
-      - MARIADB_DATABASE=hedgedoc
-      - MARIADB_USER=hedgedoc
-      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-      - MARIADB_AUTO_UPGRADE=1
-      - TZ=Europe/Berlin
+      - CMD_DB_URL=postgres://hedgedoc:${DB_PASSWORD}@db:5432/hedgedoc
+      - CMD_DOMAIN=hedgedoc.e6.freeddns.org
+      - CMD_PROTOCOL_USESSL=true
+      - CMD_SESSION_SECRET=${SESSION_SECRET}
+      - CMD_ALLOW_EMAIL_REGISTER=false
+      - CMD_ENABLE_UPLOADS=registered
+    ports:
+      - "127.0.0.1:3020:3000"
+  db:
+    image: postgres:18.1
+    restart: unless-stopped
+    user: 3021:3021
+    environment:
+      - POSTGRES_DB=hedgedoc
+      - POSTGRES_USER=hedgedoc
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./data:/var/lib/postgresql
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD", "pg_isready", "-U", "hedgedoc"]
       start_period: 2m
       interval: 10s
-  hedgedoc:
-    image: lscr.io/linuxserver/hedgedoc:1.10.6
-    container_name: hedgedoc
-    restart: always
-    depends_on:
-      - mariadb
-    volumes:
-      - ./hedgedoc:/config
-    environment:
-      - DB_HOST=mariadb
-      - DB_USER=hedgedoc
-      - DB_PASS=${MARIADB_PASSWORD}
-      - DB_NAME=hedgedoc
-      - DB_PORT=3306
-      - PGID=1000
-      - PUID=1000
-      - TZ=Europe/Berlin
-      - CMD_DOMAIN=hedgedoc.e6.freeddns.org
-      - CMD_URL_ADDPORT=false #optional
-      - CMD_PROTOCOL_USESSL=true #optional
-      - CMD_PORT=3000 #optional
-    ports:
-      - "127.0.0.1:3000:3000"
