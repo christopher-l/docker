@@ -1,0 +1,13 @@
+services:
+  rclone:
+    image: rclone/rclone:1.73.1
+    user: 3060:3060
+    volumes:
+      - ./media:/data
+      - ./config:/config:ro
+    command: serve webdav
+      /data
+      --addr :8080
+      --htpasswd /config/htpasswd
+    ports:
+      - 127.0.0.1:3060:8080
