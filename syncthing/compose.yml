@@ -10,6 +10,8 @@ services:
     ports:
       - 127.0.0.1:3050:8384
       - 10722:22000
+      - 10722:22000/udp
+      - 21027:21027/udp
     healthcheck:
       test: curl -fkLsS -m 2 127.0.0.1:8384/rest/noauth/health | grep -o --color=never OK || exit 1
       interval: 1m
