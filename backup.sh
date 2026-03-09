@@ -11,12 +11,3 @@ for d in */ ; do
         ./backup.sh backup
     )
 done
-
-echo Copying data...
-rsync . -a \
-    --exclude='/*/data/*' \
-    --exclude='/.git' \
-    --exclude='/.ssh' \
-    --delete \
-    --delete-excluded \
-    /home/chris/Backup/Vortex/Docker/
