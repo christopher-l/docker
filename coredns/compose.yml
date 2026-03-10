@@ -1,0 +1,11 @@
+services:
+  coredns:
+    image: coredns/coredns:1.14.2
+    restart: unless-stopped
+    user: 3053:3053
+    volumes:
+      - ./Corefile:/Corefile:ro
+      - /etc/resolv.conf:/etc/resolv.conf:ro
+    ports:
+      - 53:53
+      - 53:53/udp

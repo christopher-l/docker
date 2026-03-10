@@ -1,0 +1,10 @@
+local.e6.freeddns.org {
+    template IN A {
+        match (^|\.)local\.e6\.freeddns\.org\.$
+        answer "{{ .Name }} 300 IN A 192.168.178.71"
+    }
+}
+
+. {
+    forward . /etc/resolv.conf
+}
