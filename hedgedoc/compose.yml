@@ -6,7 +6,7 @@ services:
       - db
     user: 3020:3020
     volumes:
-      - .uploads:/hedgedoc/public/uploads
+      - ./uploads:/hedgedoc/public/uploads
     environment:
       - CMD_DB_URL=postgres://hedgedoc:${DB_PASSWORD}@db:5432/hedgedoc
       - CMD_DOMAIN=hedgedoc.e6.freeddns.org
