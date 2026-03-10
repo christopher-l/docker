@@ -1,6 +1,6 @@
 services:
   syncthing:
-    image: syncthing/syncthing
+    image: syncthing/syncthing:2.0.15
     restart: unless-stopped
     user: 3050:3050
     volumes:
