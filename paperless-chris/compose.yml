@@ -1,6 +1,6 @@
 services:
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.6
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.10
     restart: unless-stopped
     depends_on:
       - broker
@@ -8,8 +8,7 @@ services:
     ports:
       - "127.0.0.1:3030:8000"
     healthcheck:
-      test:
-        ["CMD", "curl", "-fs", "-S", "--max-time", "2", "http://localhost:8000"]
+      test: ["CMD", "curl", "-fs", "-S", "--max-time", "2", "http://localhost:8000"]
       start_period: 2m
       interval: 10s
     volumes:
@@ -22,7 +21,7 @@ services:
       TZ: ${PAPERLESS_TIME_ZONE}
       PAPERLESS_REDIS: redis://broker:6379
   broker:
-    image: docker.io/library/redis:8.4.0
+    image: docker.io/library/redis:8.6.1
     restart: unless-stopped
     user: 3031:3031
     volumes:
