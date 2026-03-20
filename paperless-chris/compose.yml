@@ -1,6 +1,6 @@
 services:
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.10
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.11
     restart: unless-stopped
     depends_on:
       - broker
@@ -8,7 +8,8 @@ services:
     ports:
       - "127.0.0.1:3030:8000"
     healthcheck:
-      test: ["CMD", "curl", "-fs", "-S", "--max-time", "2", "http://localhost:8000"]
+      test:
+        ["CMD", "curl", "-fs", "-S", "--max-time", "2", "http://localhost:8000"]
       start_period: 2m
       interval: 10s
     volumes:
