@@ -6,8 +6,10 @@ cd -- "$( dirname -- "${BASH_SOURCE[0]}" )"
 
 for d in */ ; do
     (
-        echo Backing up $d...
         cd $d
-        ./backup.sh backup
+        if [ -f backup.sh ]; then
+            echo Backing up $d...
+            ./backup.sh backup
+        fi
     )
 done

@@ -6,12 +6,12 @@ source .env
 
 case $1 in
     backup)
-        docker compose exec -i db /bin/bash -c \
-            "PGPASSWORD=$DB_PASSWORD pg_dump --username $DB_USER $DB_DATABASE" > dump.sql
+        sudo docker compose exec -i db /bin/bash -c \
+            "PGPASSWORD=$DB_PASSWORD pg_dump --username $DB_USER $DB_DATABASE" > backup/dump.sql
         ;;
     restore)
-        docker compose exec -T db /bin/bash -c \
-            "PGPASSWORD=$DB_PASSWORD psql --username $DB_USER $DB_DATABASE" < dump.sql
+        sudo docker compose exec -T db /bin/bash -c \
+            "PGPASSWORD=$DB_PASSWORD psql --username $DB_USER $DB_DATABASE" < backup/dump.sql
         ;;
     restore_online)
         echo "db"

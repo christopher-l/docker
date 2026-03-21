@@ -4,10 +4,10 @@ set -e
 
 case $1 in
     backup)
-        docker compose exec paperless document_exporter ../export -d --data-only
+        sudo docker compose exec paperless document_exporter ../export -d --data-only
         ;;
     restore)
-        docker compose exec paperless document_importer ../export --data-only
+        sudo docker compose exec paperless document_importer ../export --data-only
         ;;
     restore_online)
         true
