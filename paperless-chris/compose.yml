@@ -22,7 +22,7 @@ services:
       TZ: ${PAPERLESS_TIME_ZONE}
       PAPERLESS_REDIS: redis://broker:6379
   broker:
-    image: docker.io/library/redis:8.6.1
+    image: docker.io/library/redis:8.6.2
     restart: unless-stopped
     user: 3031:3031
     volumes:
