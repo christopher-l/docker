@@ -3,6 +3,10 @@ local.e6.freeddns.org {
         match (^|\.)local\.e6\.freeddns\.org\.$
         answer "{{ .Name }} 300 IN A 192.168.178.71"
     }
+    template IN AAAA {
+        match (^|\.)local\.e6\.freeddns\.org\.$
+        answer "{{ .Name }} 300 IN AAAA fd81:19fc:e1dc::da3a:ddff:fe34:81b6"
+    }
 }
 
 . {
