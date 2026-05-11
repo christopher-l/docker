@@ -1,0 +1,20 @@
+# From https://github.com/yshalsager/logseq-selfhost/tree/master/images/sync
+
+services:
+  sync:
+    image: ghcr.io/yshalsager/logseq-selfhost-sync:20260509-8857be2
+    restart: unless-stopped
+    user: 3090:3090
+    env_file:
+      - path: .env
+    ports:
+      - "127.0.0.1:3090:8787"
+    volumes:
+      - ./media:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
