@@ -1,6 +1,6 @@
 services:
   rclone:
-    image: rclone/rclone:1.74.0
+    image: rclone/rclone:1.74.1
     restart: unless-stopped
     user: 3060:3060
     volumes:
